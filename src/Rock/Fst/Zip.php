@@ -14,10 +14,11 @@ class Rock_Fst_Zip
             unlink($filename);
         }
         $this->zip = new ZipArchive();
-        $this->zip->open($filename, ZipArchive::OVERWRITE);
+        $this->zip->open($filename, ZipArchive::CREATE | ZipArchive::OVERWRITE);
         if (is_dir("$dir")) {
             $this->recursive($dir);
         }
+        $this->zip->close();
     }
 
     private function recursive($dir)
